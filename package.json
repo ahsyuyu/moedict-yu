@@ -1,0 +1,24 @@
+{
+  "name": "ksana2015-scaffold-default",
+  "description": "New Ksana application",
+  "version": "0.0.1",
+  "main": "index.html",
+  "inject-js-start": "nwmain.js",
+  "single-instance": true,
+  "window": {
+    "toolbar": true,
+    "width": 1060,
+    "height": 700
+  },
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:ahsyuyu/moedict-yu.git"
+  },
+  "readme": "scaffold for ksana2015 app",
+  "readmeFilename": "README.md",
+  "_id": "ksana2015-scaffold-default@0.0.1",
+  "_shasum": "d16a061725f509e46e8398c7abd6d1f7b932bc0d",
+  "_resolved": "git+https://github.com/ksanaforge/ksana2015-scaffold-default.git#d3a4af802731fefd8cfd5585ce86ee443c45fda8",
+  "_from": "git+https://github.com/ksanaforge/ksana2015-scaffold-default.git"
+}
