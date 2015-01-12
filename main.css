@@ -1,12 +1,22 @@
-.entriearea{font-size: 200%;}
+.entriearea{font-size: 200%;
+ /*src: url("font/NotoSansCJKtc-Light.otf"); */
+ 	font-weight: 100;
+ 	font-family: "Microsoft JhengHei";
+}
 
 .center{text-align: center;}
 
+.toolbar{
+	background-color: #5B5B5B;
+}
+
 .maininput{
 	border-radius: 0px;
-	border: 5px solid;
+	border: black 7px solid;
 	background-color: black;
 	color: white;
+	font-weight: 100;
+	width: 50%;
 }
 
 .counter {
@@ -15,7 +25,8 @@
 
 .resultlist{
 	border-radius: 0px;
-	border: 5px solid;
+	border-radius: 0px;
+	border: #333 3px solid;
 	background-color: #5B5B5B;
 	color: white;
 }
@@ -24,6 +35,9 @@ a{
 	color:black;
 	cursor: pointer;
 }
+a:hover{
+	color: #5B5B5B; 
+}
 
 .defbox{
 	cursor: pointer;
@@ -31,7 +45,7 @@ a{
 
 .title{
 	font-size: 150%;
-	background-color:#5B5B5B;
+	background-color:black;
 	color:white;
 }
 
@@ -53,6 +67,7 @@ a{
     font-size: 100%;
     border-radius: 100%;
     color:white;
+    font-weight: 100;
 }
 
 .radio-toolbar input[type="radio"]:checked + label { 

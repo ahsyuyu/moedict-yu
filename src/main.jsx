@@ -100,11 +100,11 @@ var maincomponent = React.createClass({
   render: function() {
     return(
     <div className="entriearea">
-      <div className="center">
+      <div className="center toolbar">
         <Searchbar dosearch={this.dosearch} />
         <Overview result={this.state.result} gotoEntry={this.gotoEntry} />
+        <br/>
       </div>
-      <br></br>
       <Showtext gotoEntry={this.gotoEntry} defSearch={this.defSearch} defs={this.state.defs} tofind={this.state.tofind} result={this.state.result}/>
     </div>
     );
