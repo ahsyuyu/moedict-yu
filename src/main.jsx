@@ -99,10 +99,12 @@ var maincomponent = React.createClass({
   },
   render: function() {
     return(
-    <div>
-      <Searchbar dosearch={this.dosearch} />
-      <Overview result={this.state.result} gotoEntry={this.gotoEntry} />
-      <br></br><br></br>
+    <div className="entriearea">
+      <div className="center">
+        <Searchbar dosearch={this.dosearch} />
+        <Overview result={this.state.result} gotoEntry={this.gotoEntry} />
+      </div>
+      <br></br>
       <Showtext gotoEntry={this.gotoEntry} defSearch={this.defSearch} defs={this.state.defs} tofind={this.state.tofind} result={this.state.result}/>
     </div>
     );

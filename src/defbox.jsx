@@ -33,7 +33,7 @@ var Defbox=React.createClass({
     if(d.length!=0) {
       for(var i=0; i<d.length; i++) {
         var t=d[i][0].split("\n");
-        var title='<span class="title">'+t[0]+'</span>';
+        var title='<div class="title">'+t[0]+'</div>';
         defs.push(title);
         this.state.searchResult.push([t[0],d[i][1]]);
         for(var j=1; j<t.length; j++) {

@@ -28,12 +28,10 @@ var Overview=React.createClass({
   	var res=this.props.result || "";
     return(
 	<div>
-    <span id="vertical_center" className="badge">{res.length}</span>
-		<div className="col-sm-2">
-			<select ref="entryList" className="form-control" onChange={this.getDefFromEntryId}>
+    <span className="counter">{res.length}</span>
+			<select className="resultlist" ref="entryList" onChange={this.getDefFromEntryId}>
       {this.props.result.map(this.renderResult)}
 			</select>
-		</div>
 	</div>	
     ); 
   }
