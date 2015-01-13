@@ -9,6 +9,7 @@ var Searchhistory=React.createClass({
   		if(item[1]==entryIndex) {
   			if(index==0) that.props.defSearch(item[2],1);
   			else that.props.dosearch(item[2]);
+  			that.props.popHistory(index);
   		}
   	})
   },
@@ -21,7 +22,7 @@ var Searchhistory=React.createClass({
   	var searchhistory=res.join(" > ");
     return(
 	<div onClick={this.goEntry}>
-		<div dangerouslySetInnerHTML={{__html: searchhistory}} />
+		<div className="history" dangerouslySetInnerHTML={{__html: searchhistory}} />
 	</div>
     	
     ); 

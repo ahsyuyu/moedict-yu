@@ -4,6 +4,13 @@ var Showtext=React.createClass({
   getInitialState: function() {
   	return {entryHistory:[],tofind:""};
   },
+  popHistory: function(index) {
+    var h=this.state.entryHistory;
+    for(var i=0; i<h.length-index+1; i++){
+      this.state.entryHistory.pop();
+      console.log(h);
+    }
+  },
   pushHistory: function(searchResult,clickedIndex) {//searchResult [title,titleIndex,tofind]
     var that=this;
     searchResult.map(function(item){
@@ -11,7 +18,7 @@ var Showtext=React.createClass({
     });
   },
   dosearch: function(tofind) {
-    for(var i=1; i<tofind.length; i++){
+    for(var i=1; i<tofind.length+1; i++){
       var t=tofind.substr(0,i);
       this.props.defSearch(t,i);
     }
@@ -19,7 +26,7 @@ var Showtext=React.createClass({
   render: function() {
     return (
     <div>
-    	<Searchhistory defSearch={this.props.defSearch} dosearch={this.dosearch} gotoEntry={this.props.gotoEntry} entryHistory={this.state.entryHistory} result={this.props.result}/>
+    	<Searchhistory popHistory={this.popHistory} defSearch={this.props.defSearch} dosearch={this.dosearch} gotoEntry={this.props.gotoEntry} entryHistory={this.state.entryHistory} result={this.props.result}/>
       <br/>
     	<Defbox dosearch={this.dosearch} pushHistory={this.pushHistory} defs={this.props.defs} result={this.props.result} /> 	
     </div>

@@ -25,10 +25,12 @@ var Overview=React.createClass({
     else return (<option>{item}</option>);
   },
   render: function() {
+    var resCounter=0;
   	var res=this.props.result || "";
+    if(res!="搜尋結果列表") resCounter=res.length;
     return(
 	<div>
-    <span className="counter">{res.length}</span>
+    <span className="counter">{resCounter}</span>
 			<select className="resultlist" ref="entryList" onChange={this.getDefFromEntryId}>
       {this.props.result.map(this.renderResult)}
 			</select>

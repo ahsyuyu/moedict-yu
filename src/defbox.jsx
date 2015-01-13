@@ -2,6 +2,9 @@ var Defbox=React.createClass({
   getInitialState: function() {
   	return {searchResult:[],tofinds:[]};
   },
+  componentWillReceiveProps: function() {
+    $('html, body').scrollTop(0);
+  },
   renderDef: function(item,e) {
     var parsedItem=item.replace(/./g,function(r){
         return '<span data-entry='+e+'>'+r+'</span>';
@@ -14,7 +17,7 @@ var Defbox=React.createClass({
     var next=e.target.nextSibling;
     var tf=this.state.tofinds;
     for(var i=0; i<10; i++){
-      if(!next || next.textContent.match(/[。，、「」：]/g)) break;  
+      //if(!next || next.textContent.match(/[。，、「」：]/g)) break;  
       tofind+=next.textContent;
       next=next.nextSibling;
     }

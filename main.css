@@ -7,7 +7,7 @@
 .center{text-align: center;}
 
 .toolbar{
-	background-color: #5B5B5B;
+	/*background-color: #5B5B5B;*/
 }
 
 .maininput{
@@ -26,7 +26,7 @@
 .resultlist{
 	border-radius: 0px;
 	border-radius: 0px;
-	border: #333 3px solid;
+	border: white 3px solid;/*#333*/
 	background-color: #5B5B5B;
 	color: white;
 }
@@ -45,7 +45,7 @@ a:hover{
 
 .title{
 	font-size: 150%;
-	background-color:black;
+	background-color:#5B5B5B;
 	color:white;
 }
 
@@ -60,14 +60,15 @@ a:hover{
 
 .radio-toolbar label {
     display:inline-block;
-    background-color:#5B5B5B;
+    background-color:white;
     padding:15px 10px 10px 10px;
     font-size:16px;
     width:70px;height:70px;
     font-size: 100%;
     border-radius: 100%;
-    color:white;
+    color:black;
     font-weight: 100;
+    border:black 1px dashed;
 }
 
 .radio-toolbar input[type="radio"]:checked + label { 
