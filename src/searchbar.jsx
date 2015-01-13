@@ -2,35 +2,42 @@ var Searchbar=React.createClass({
   getInitialState: function() {
   	return {field:[]};
   },
+  componentDidMount: function() {
+  	// var tofind=this.refs.tofind.getDOMNode().value;
+  	// this.props.dosearch(tofind,this.props.searchfield);
+  },
   componentWillUpdate: function() {
 	$("label[data-type='"+this.state.field+"']").attr('id', 'checkedfield');
   },
   todosearch: function(e) {
-  	$("label").removeAttr('id');
+  	if(e.target.nodeName=="LABEL") $("label").removeAttr('id');
   	var tofind=this.refs.tofind.getDOMNode().value;
     //var field=$(this.refs.searchtype.getDOMNode()).find("label")[0].dataset.type;
     var field=e.target.dataset.type;
     this.setState({field:field});
-  	if(tofind) this.props.dosearch(tofind,field);
+  	if(tofind) {
+  		if(field) this.props.dosearch(tofind,field);
+  		else this.props.dosearch(tofind,this.props.searchfield);
+  	}
   },
   render: function() {
     return(
   <div>
   	<div>
 	  <div>
-	    <input className="maininput" type="text" ref="tofind" placeholder="請輸入字詞" defaultValue="月" onKeyDown={this.todosearch} onChange={this.todosearch}/>
+	    <input className="maininput" type="text" ref="tofind" placeholder="請輸入字詞" defaultValue="月" onChange={this.todosearch}/>
 	  </div>    
 	  <div className="radio-toolbar" ref="searchtype" onClick={this.todosearch}>
-	    <label data-type="start">
+	    <label data-type="start" id="checkedfield">
 	      <input type="radio" name="field" checked>頭</input>
 	    </label>
-	    &nbsp;&nbsp;<label data-type="end">
+	    <label data-type="end">
 	      <input type="radio" name="field">尾</input>
 	    </label>
-	    &nbsp;&nbsp;<label data-type="middle">
+	    <label data-type="middle">
 	      <input type="radio" name="field">中</input>
 	    </label>
-	    &nbsp;&nbsp;<label data-type="fulltext">
+	    <label data-type="fulltext">
 	      <input type="radio" name="field">全</input>
 	    </label>
 	  </div>

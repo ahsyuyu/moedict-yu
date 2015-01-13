@@ -36,8 +36,12 @@ var Defbox=React.createClass({
     }
     return defs;
   },
+  tohighlight: function(def) {
+    return this.props.highlight(def,this.props.tofind,this.props.entryIndex);
+  },
   render: function() {
     var d=this.reverseDef(this.props.defs);
+    //if(this.props.searchfield=="fulltext") d=this.tohighlight(d);
     var defs=[];
     this.state.searchResult=[];
     if(d.length!=0) {

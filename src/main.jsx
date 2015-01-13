@@ -11,9 +11,10 @@ var maincomponent = React.createClass({
       var entries=db.get("segnames");
       that.setState({entries:entries,db:db});
     });    
-  	return {entries:[],result:["搜尋結果列表"],searchtype:"start",defs:[]};
+  	return {result:["搜尋結果列表"],searchfield:"start",defs:[],entryIndex:[]};
   },
   dosearch: function(tofind,field) {
+    this.setState({tofind:tofind,searchfield:field});
     if(field=="start"){
       this.search_start(tofind);
     }
@@ -66,10 +67,6 @@ var maincomponent = React.createClass({
       out=data.excerpt.map(function(item){return [item.segname,item.seg];});
       that.setState({result:out});
     }) 
-    // kse.highlightSeg(this.state.db,0,{q:tofind,nospan:true},function(data){
-    //   out=data.excerpt.map(function(item){return [item.segname,item.seg];});
-    //   that.setState({result:out});
-    // });
   },
   defSearch: function(tofind,reset) {//點選def做搜尋就是用defSearch
     this.setState({tofind:tofind});
@@ -89,23 +86,30 @@ var maincomponent = React.createClass({
   gotoEntry: function(index) {// 從下拉選單點選的項目or 點searchhistory會用gotoEntry 來顯示def
     var that=this;
     var defs=[];
+    this.setState({entryIndex:index});
     kde.open("moedict",function(err,db){
-      //var def=db.get("moedict.fileContents.0."+index);
       var def=db.get(["filecontents",0,index],function(data){
         defs.push([data,index]);
         that.setState({defs:defs});
       });
     }); 
   },
+  highlight: function(def,tofind,segid) {
+    var out=[];
+    kse.highlightSeg(this.state.db,0,segid,{q:tofind,nospan:true},function(data){
+      out=data;
+    });
+    return out;
+  },
   render: function() {
     return(
     <div className="entriearea">
       <div className="center toolbar">
-        <Searchbar dosearch={this.dosearch} />
-        <Overview result={this.state.result} gotoEntry={this.gotoEntry} />
+        <Searchbar searchfield={this.state.searchfield} dosearch={this.dosearch} />
+        <Overview searchfield={this.state.searchfield} result={this.state.result} gotoEntry={this.gotoEntry} />
         <br/>
       </div>
-      <Showtext gotoEntry={this.gotoEntry} defSearch={this.defSearch} defs={this.state.defs} tofind={this.state.tofind} result={this.state.result}/>
+      <Showtext highlight={this.highlight} searchfield={this.state.searchfield} gotoEntry={this.gotoEntry} defSearch={this.defSearch} defs={this.state.defs} tofind={this.state.tofind} result={this.state.result} entryIndex={this.entryIndex} />
     </div>
     );
   }
