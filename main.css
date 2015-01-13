@@ -16,7 +16,7 @@
 	background-color: black;
 	color: white;
 	font-weight: 100;
-	width: 50%;
+	width: 25%;
 }
 
 .counter {
@@ -71,7 +71,4 @@ a:hover{
     border:black 1px dashed;
 }
 
-.radio-toolbar input[type="radio"]:checked + label { 
-    background-color:#bbb;
-}
 

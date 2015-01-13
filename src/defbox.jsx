@@ -29,8 +29,15 @@ var Defbox=React.createClass({
     }
     this.props.dosearch(tofind);
   },
+  reverseDef: function(d) {
+    var defs=[];
+    for(var i=0; i<d.length; i++){
+      defs[d.length-i-1]=d[i];
+    }
+    return defs;
+  },
   render: function() {
-    var d=this.props.defs;
+    var d=this.reverseDef(this.props.defs);
     var defs=[];
     this.state.searchResult=[];
     if(d.length!=0) {
