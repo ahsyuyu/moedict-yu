@@ -16,19 +16,22 @@
 	background-color: black;
 	color: white;
 	font-weight: 100;
-	width: 25%;
+	width: 50%;
 }
 
 .counter {
 	font-family: courier;
+	position: fixed;
 }
 
 .resultlist{
 	border-radius: 0px;
-	border-radius: 0px;
 	border: white 3px solid;/*#333*/
 	background-color: #5B5B5B;
 	color: white;
+	word-wrap:break-word;
+	max-width:250px;
+	min-width:250px;
 }
 
 a{
