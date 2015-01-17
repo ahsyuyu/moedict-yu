@@ -21,7 +21,14 @@
 
 .counter {
 	font-family: courier;
-	position: fixed;
+}
+
+.hl {
+	color:red;
+}
+
+.space {
+	height: 8px;
 }
 
 .resultlist{
@@ -64,9 +71,9 @@ a:hover{
 .radio-toolbar label {
     display:inline-block;
     background-color:white;
-    padding:15px 10px 10px 10px;
+    padding:5px 10px 10px 10px;
     font-size:16px;
-    width:70px;height:70px;
+    width:50px;height:50px;
     font-size: 100%;
     border-radius: 100%;
     color:black;
@@ -74,4 +81,8 @@ a:hover{
     border:black 1px dashed;
 }
 
+.highlight{
+	background-color: black;
+	color: white;
+}
 

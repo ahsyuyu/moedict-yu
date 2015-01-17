@@ -2,7 +2,7 @@ var Searchhistory=require("./searchhistory.jsx");
 var Defbox=require("./defbox.jsx");
 var Showtext=React.createClass({
   getInitialState: function() {
-  	return {entryHistory:[],tofind:""};
+  	return {entryHistory:[],tofind:"",vpos:[]};
   },
   popHistory: function(index) {
     var h=this.state.entryHistory;
@@ -18,17 +18,17 @@ var Showtext=React.createClass({
     });
   },
   dosearch: function(tofind) {
-    for(var i=1; i<tofind.length+1; i++){
-      var t=tofind.substr(0,i);
-      this.props.defSearch(t,i);
-    }
+      this.props.defSearch(tofind);
+  },
+  getClickedVpos: function(vpos) {
+    this.setState({vpos:vpos})
   },
   render: function() {
     return (
     <div>
     	<Searchhistory popHistory={this.popHistory} defSearch={this.props.defSearch} dosearch={this.dosearch} gotoEntry={this.props.gotoEntry} entryHistory={this.state.entryHistory} result={this.props.result}/>
       <br/>
-    	<Defbox entryIndex={this.props.entryIndex} highlight={this.props.highlight} tofind={this.props.tofind} searchfield={this.props.searchfield} dosearch={this.dosearch} pushHistory={this.pushHistory} defs={this.props.defs} result={this.props.result} /> 	
+    	<Defbox getClickedVpos={this.getClickedVpos} vpos={this.state.vpos} highlight={this.props.highlight} tofind={this.props.tofind} searchfield={this.props.searchfield} dosearch={this.dosearch} pushHistory={this.pushHistory} defs={this.props.defs} result={this.props.result} /> 	
     </div>
     );
   }
