@@ -10,16 +10,6 @@ var Defbox=React.createClass({
   componentWillReceiveProps: function() {
     $('html, body').scrollTop(0);
   },
-  componentDidUpdate: function(prevProps,prevState){
-    var vpos=prevState.vpos;
-    $('span[vpos="'+vpos+'"]').addClass("highlight");
-  },
-  renderDef: function(item,e) {
-    var parsedItem=item.replace(/./g,function(r){
-        return '<span data-entry='+e+'>'+r+'</span>';
-      });
-    return parsedItem;
-  },
   dosearch_history: function(e) {
     var entryIndex=e.target.parentElement.dataset.entry;
     var vpos=e.target.attributes[0].value;
@@ -36,11 +26,13 @@ var Defbox=React.createClass({
     if(tf.length==0) tf.push(this.state.searchResult[0][0]);
     tf.push(tofind);
     if(entryIndex) {
-      this.state.searchResult.map(function(item){item.push(tf[tf.length-2])});
+      this.state.searchResult.map(function(item){
+        item.push(tf[tf.length-2]);
+        item.push(vpos);
+      });
       this.props.pushHistory(this.state.searchResult,entryIndex);
     }
     this.props.dosearch(tofind);
-    //this.props.getClickedVpos(vpos);
   },
   reverseDef: function(d) {
     if(debug) console.log("renderDef:",new Date());
@@ -70,7 +62,6 @@ var Defbox=React.createClass({
         defs.push(title);
         this.state.searchResult.push([t[0],d[i][1]]);
         for(var j=1; j<t.length; j++) {
-          //var t1=this.renderDef(,);
           defs.push(t[j]);
         }
         defs.push("</div>")

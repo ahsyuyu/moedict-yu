@@ -20,9 +20,6 @@ var Showtext=React.createClass({
   dosearch: function(tofind) {
       this.props.defSearch(tofind);
   },
-  getClickedVpos: function(vpos) {
-    this.setState({vpos:vpos})
-  },
   render: function() {
     return (
     <div>

@@ -1,6 +1,11 @@
 var Searchhistory=React.createClass({
   getInitialState: function() {
-  	return {};
+  	return {vpos:[]};
+  },
+  componentDidUpdate: function() {
+    var vpos=this.state.vpos;
+    $('span[vpos=]').removeClass("highlight");
+    $('span[vpos="'+vpos+'"]').addClass("highlight");
   },
   goEntry: function(e) {
   	var entryIndex=e.target.parentElement.dataset.entry
@@ -9,8 +14,12 @@ var Searchhistory=React.createClass({
   		if(item[1]==entryIndex) {
   			if(index==0) {
   				var text=item[0].replace(/[<>="a-z0-9\/ ]/g,"");
-  				that.props.defSearch(text,1);
-  			} else that.props.defSearch(item[2]);
+  				that.props.defSearch(text);
+          that.setState({vpos:item[3]});
+  			} else {
+          that.props.defSearch(item[2]);
+          that.setState({vpos:item[3]});
+        }
   			that.props.popHistory(index);
   		}
   	})

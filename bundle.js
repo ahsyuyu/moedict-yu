@@ -64,16 +64,6 @@ var Defbox=React.createClass({displayName: "Defbox",
   componentWillReceiveProps: function() {
     $('html, body').scrollTop(0);
   },
-  componentDidUpdate: function(prevProps,prevState){
-    var vpos=prevState.vpos;
-    $('span[vpos="'+vpos+'"]').addClass("highlight");
-  },
-  renderDef: function(item,e) {
-    var parsedItem=item.replace(/./g,function(r){
-        return '<span data-entry='+e+'>'+r+'</span>';
-      });
-    return parsedItem;
-  },
   dosearch_history: function(e) {
     var entryIndex=e.target.parentElement.dataset.entry;
     var vpos=e.target.attributes[0].value;
@@ -90,11 +80,13 @@ var Defbox=React.createClass({displayName: "Defbox",
     if(tf.length==0) tf.push(this.state.searchResult[0][0]);
     tf.push(tofind);
     if(entryIndex) {
-      this.state.searchResult.map(function(item){item.push(tf[tf.length-2])});
+      this.state.searchResult.map(function(item){
+        item.push(tf[tf.length-2]);
+        item.push(vpos);
+      });
       this.props.pushHistory(this.state.searchResult,entryIndex);
     }
     this.props.dosearch(tofind);
-    //this.props.getClickedVpos(vpos);
   },
   reverseDef: function(d) {
     if(debug) console.log("renderDef:",new Date());
@@ -124,7 +116,6 @@ var Defbox=React.createClass({displayName: "Defbox",
         defs.push(title);
         this.state.searchResult.push([t[0],d[i][1]]);
         for(var j=1; j<t.length; j++) {
-          //var t1=this.renderDef(,);
           defs.push(t[j]);
         }
         defs.push("</div>")
@@ -374,7 +365,12 @@ module.exports=Searchbar;
 },{}],"/Users/yu/ksana2015/moedict-yu/src/searchhistory.jsx":[function(require,module,exports){
 var Searchhistory=React.createClass({displayName: "Searchhistory",
   getInitialState: function() {
-  	return {};
+  	return {vpos:[]};
+  },
+  componentDidUpdate: function() {
+    var vpos=this.state.vpos;
+    $('span[vpos=]').removeClass("highlight");
+    $('span[vpos="'+vpos+'"]').addClass("highlight");
   },
   goEntry: function(e) {
   	var entryIndex=e.target.parentElement.dataset.entry
@@ -383,8 +379,12 @@ var Searchhistory=React.createClass({displayName: "Searchhistory",
   		if(item[1]==entryIndex) {
   			if(index==0) {
   				var text=item[0].replace(/[<>="a-z0-9\/ ]/g,"");
-  				that.props.defSearch(text,1);
-  			} else that.props.defSearch(item[2]);
+  				that.props.defSearch(text);
+          that.setState({vpos:item[3]});
+  			} else {
+          that.props.defSearch(item[2]);
+          that.setState({vpos:item[3]});
+        }
   			that.props.popHistory(index);
   		}
   	})
@@ -427,9 +427,6 @@ var Showtext=React.createClass({displayName: "Showtext",
   },
   dosearch: function(tofind) {
       this.props.defSearch(tofind);
-  },
-  getClickedVpos: function(vpos) {
-    this.setState({vpos:vpos})
   },
   render: function() {
     return (
