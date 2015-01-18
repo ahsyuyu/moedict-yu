@@ -11,10 +11,11 @@
 }
 
 .maininput{
-	border-radius: 0px;
-	border: black 7px solid;
-	background-color: black;
-	color: white;
+	border-radius: 50px;
+	border: gray 1px solid;
+	/*background-color: black;
+	color: white;*/
+	text-align: center;
 	font-weight: 100;
 	width: 75%;
 	height: 50px;
@@ -34,7 +35,7 @@
 
 .resultlist{
 	border-radius: 0px;
-	border: white 3px solid;/*#333*/
+	border: white 1px solid;/*#333*/
 	background-color: #5B5B5B;
 	color: white;
 	word-wrap:break-word;
