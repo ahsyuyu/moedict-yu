@@ -7,10 +7,11 @@ var Defbox=React.createClass({
     if(nextProps.defs != this.props.defs) return true;
     else return false;
   },
-  componentWillReceiveProps: function(nextProps) {
+  componentWillReceiveProps: function() {
     $('html, body').scrollTop(0);
-    var vpos=nextProps.vpos;
-    //$('span[vpos=]').removeClass("highlight");
+  },
+  componentDidUpdate: function(prevProps,prevState){
+    var vpos=prevState.vpos;
     $('span[vpos="'+vpos+'"]').addClass("highlight");
   },
   renderDef: function(item,e) {
@@ -25,6 +26,7 @@ var Defbox=React.createClass({
     var tofind=e.target.textContent;
     var next=e.target.nextSibling;
     var tf=this.state.tofinds;
+    this.setState({vpos:vpos});
     for(var i=0; i<10; i++){
       //if(!next || next.textContent.match(/[。，、「」：]/g)) break;  
       if(!next.textContent) break;  
@@ -38,7 +40,7 @@ var Defbox=React.createClass({
       this.props.pushHistory(this.state.searchResult,entryIndex);
     }
     this.props.dosearch(tofind);
-    this.props.getClickedVpos(vpos);
+    //this.props.getClickedVpos(vpos);
   },
   reverseDef: function(d) {
     if(debug) console.log("renderDef:",new Date());

@@ -61,10 +61,11 @@ var Defbox=React.createClass({displayName: "Defbox",
     if(nextProps.defs != this.props.defs) return true;
     else return false;
   },
-  componentWillReceiveProps: function(nextProps) {
+  componentWillReceiveProps: function() {
     $('html, body').scrollTop(0);
-    var vpos=nextProps.vpos;
-    //$('span[vpos=]').removeClass("highlight");
+  },
+  componentDidUpdate: function(prevProps,prevState){
+    var vpos=prevState.vpos;
     $('span[vpos="'+vpos+'"]').addClass("highlight");
   },
   renderDef: function(item,e) {
@@ -79,6 +80,7 @@ var Defbox=React.createClass({displayName: "Defbox",
     var tofind=e.target.textContent;
     var next=e.target.nextSibling;
     var tf=this.state.tofinds;
+    this.setState({vpos:vpos});
     for(var i=0; i<10; i++){
       //if(!next || next.textContent.match(/[。，、「」：]/g)) break;  
       if(!next.textContent) break;  
@@ -92,7 +94,7 @@ var Defbox=React.createClass({displayName: "Defbox",
       this.props.pushHistory(this.state.searchResult,entryIndex);
     }
     this.props.dosearch(tofind);
-    this.props.getClickedVpos(vpos);
+    //this.props.getClickedVpos(vpos);
   },
   reverseDef: function(d) {
     if(debug) console.log("renderDef:",new Date());
@@ -170,7 +172,7 @@ var maincomponent = React.createClass({displayName: "maincomponent",
         this.setState({result:out});
       }
       if(field=="end"){
-        out=api.search_end(this.state.entries,tofind);
+        out=api.search_end(this.state.entries,tofind);       
         this.setState({result:out});
       }
       if(field=="middle"){
@@ -213,7 +215,7 @@ var maincomponent = React.createClass({displayName: "maincomponent",
     // }
     for(var i=0;i<eIdx.length;i++){
       (function(idx) {  //用參數idx 保存 eIdx[i]的值
-        kse.highlightSeg(that.state.db,0,idx,{q:that.state.entries[idx]},function(data){
+        kse.highlightSeg(that.state.db,0,idx,{q:"~"},function(data){//that.state.entries[idx]
                   //debugger;//強迫停在這裡觀察
           defs.push([data.text,idx]);
           if(defs.length==eIdx.length)that.setState({defs:defs}); //eIdx.length 可以用，因為這個值不變
@@ -234,9 +236,11 @@ var maincomponent = React.createClass({displayName: "maincomponent",
     //   });
     // }); 
     kse.highlightSeg(this.state.db,0,index,{q:"~"},function(data){//q:this.state.tofind
+      //debugger;
       defs.push([data.text,index]);
+      that.setState({defs:defs});
     });
-    this.setState({defs:defs});
+    
   },
   highlight: function(def,tofind,segid) {
     var out=[];
@@ -255,7 +259,7 @@ var maincomponent = React.createClass({displayName: "maincomponent",
         React.createElement(Overview, {searchfield: this.state.searchfield, result: this.state.result, gotoEntry: this.gotoEntry}), 
         React.createElement("br", null)
       ), 
-      React.createElement(Showtext, {highlight: this.highlight, searchfield: this.state.searchfield, gotoEntry: this.gotoEntry, defSearch: this.defSearch, defs: this.state.defs, tofind: this.state.tofind, result: this.state.result})
+      React.createElement(Showtext, {highlight: this.highlight, searchfield: this.state.searchfield, gotoEntry: this.gotoEntry, dosearch: this.dosearch, defSearch: this.defSearch, defs: this.state.defs, tofind: this.state.tofind, result: this.state.result})
     )
     );
   }
@@ -348,7 +352,7 @@ var Searchbar=React.createClass({displayName: "Searchbar",
 	  React.createElement("div", {className: "space"}), 
 	  React.createElement("div", {className: "radio-toolbar", ref: "searchtype", onClick: this.dosearch_radio}, 
 	    React.createElement("label", {"data-type": "start", id: "checkedfield"}, 
-	      React.createElement("input", {type: "radio", name: "field", checked: true}, "頭")
+	      React.createElement("input", {type: "radio", name: "field", defaultChecked: true}, "頭")
 	    ), "  ", 
 	    React.createElement("label", {"data-type": "end"}, 
 	      React.createElement("input", {type: "radio", name: "field"}, "尾")

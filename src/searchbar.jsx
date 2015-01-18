@@ -42,7 +42,7 @@ var Searchbar=React.createClass({
 	  <div className="space"></div>
 	  <div className="radio-toolbar" ref="searchtype" onClick={this.dosearch_radio}>
 	    <label data-type="start" id="checkedfield">
-	      <input type="radio" name="field" checked>頭</input>
+	      <input type="radio" name="field" defaultChecked>頭</input>
 	    </label>&nbsp;&nbsp;
 	    <label data-type="end">
 	      <input type="radio" name="field">尾</input>

@@ -30,7 +30,7 @@ var maincomponent = React.createClass({
         this.setState({result:out});
       }
       if(field=="end"){
-        out=api.search_end(this.state.entries,tofind);
+        out=api.search_end(this.state.entries,tofind);       
         this.setState({result:out});
       }
       if(field=="middle"){
@@ -73,7 +73,7 @@ var maincomponent = React.createClass({
     // }
     for(var i=0;i<eIdx.length;i++){
       (function(idx) {  //用參數idx 保存 eIdx[i]的值
-        kse.highlightSeg(that.state.db,0,idx,{q:that.state.entries[idx]},function(data){
+        kse.highlightSeg(that.state.db,0,idx,{q:"~"},function(data){//that.state.entries[idx]
                   //debugger;//強迫停在這裡觀察
           defs.push([data.text,idx]);
           if(defs.length==eIdx.length)that.setState({defs:defs}); //eIdx.length 可以用，因為這個值不變
@@ -94,9 +94,11 @@ var maincomponent = React.createClass({
     //   });
     // }); 
     kse.highlightSeg(this.state.db,0,index,{q:"~"},function(data){//q:this.state.tofind
+      //debugger;
       defs.push([data.text,index]);
+      that.setState({defs:defs});
     });
-    this.setState({defs:defs});
+    
   },
   highlight: function(def,tofind,segid) {
     var out=[];
@@ -115,7 +117,7 @@ var maincomponent = React.createClass({
         <Overview searchfield={this.state.searchfield} result={this.state.result} gotoEntry={this.gotoEntry} />
         <br/>
       </div>
-      <Showtext highlight={this.highlight} searchfield={this.state.searchfield} gotoEntry={this.gotoEntry} defSearch={this.defSearch} defs={this.state.defs} tofind={this.state.tofind} result={this.state.result} />
+      <Showtext highlight={this.highlight} searchfield={this.state.searchfield} gotoEntry={this.gotoEntry} dosearch={this.dosearch} defSearch={this.defSearch} defs={this.state.defs} tofind={this.state.tofind} result={this.state.result} />
     </div>
     );
   }
