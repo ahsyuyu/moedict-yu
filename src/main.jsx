@@ -26,7 +26,7 @@ var maincomponent = React.createClass({
     this.setState({tofind:tofind,searchfield:field});
     if(tofind != ""){
       if(field=="start"){
-        out=api.search_start(this.state.entries,tofind);
+        if(this.state.entries.length != 0) out=api.search_start(this.state.entries,tofind);
         this.setState({result:out});
       }
       if(field=="end"){

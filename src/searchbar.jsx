@@ -3,8 +3,11 @@ var Searchbar=React.createClass({
   	return {field:[],tofind:[],ckeckRadio:false};
   },
   componentDidMount: function() {
-  	// var tofind=this.refs.tofind.getDOMNode().value;
-  	// this.props.dosearch(tofind,this.props.searchfield);
+    var that=this;
+  	var tofind=this.refs.tofind.getDOMNode().value;
+    setTimeout(function(){
+     that.props.dosearch(tofind,"start");//this.props.searchfield
+    },500);
   },
   componentWillUpdate: function() {
   	//$("label[data-type='"+this.state.field+"']").
@@ -37,7 +40,7 @@ var Searchbar=React.createClass({
   <div>
   	<div>
   	  <div className="inline">
-  	    <input className="maininput" type="text" ref="tofind" placeholder="請輸入字詞" defaultValue="月" onChange={this.dosearch_input}/>
+  	    <input className="maininput" type="text" ref="tofind" placeholder="請輸入字詞" defaultValue="點" onChange={this.dosearch_input}/>
   	  </div>    
   	  <div className="radio-toolbar inline vertical_middle center" ref="searchtype" onClick={this.dosearch_radio}>
         &nbsp;<label data-type="start" id="checkedfield">
