@@ -111,6 +111,7 @@ var maincomponent = React.createClass({
   render: function() {
     return(
     <div className="entriearea">
+    1
       <div className="space" />
         <Searchbar searchfield={this.state.searchfield} dosearch={this.dosearch} />
         <Overview searchfield={this.state.searchfield} result={this.state.result} gotoEntry={this.gotoEntry} />
