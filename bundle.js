@@ -227,11 +227,11 @@ var maincomponent = React.createClass({displayName: "maincomponent",
     //     that.setState({defs:defs});
     //   });
     // }); 
-    kse.highlightSeg(this.state.db,0,index,{q:"薅"},function(data){//q:this.state.tofind
-      //debugger;
-      defs.push([data.text,index]);
-      that.setState({defs:defs});
-    });
+    // kse.highlightSeg(this.state.db,0,index,{q:"薅"},function(data){//q:this.state.tofind
+    //   //debugger;
+    //   defs.push([data.text,index]);
+    //   that.setState({defs:defs});
+    // });
     
   },
   highlight: function(def,tofind,segid) {
