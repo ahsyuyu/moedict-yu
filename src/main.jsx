@@ -113,7 +113,7 @@ var maincomponent = React.createClass({
     <div className="entriearea">
     <span>1/19-10</span>
       <div className="space" />
-      <div className="toolbar">
+      <div>
         <Searchbar searchfield={this.state.searchfield} dosearch={this.dosearch} />
         <Overview searchfield={this.state.searchfield} result={this.state.result} gotoEntry={this.gotoEntry} />
         <br/>
