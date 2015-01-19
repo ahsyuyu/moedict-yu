@@ -111,7 +111,7 @@ var maincomponent = React.createClass({
   render: function() {
     return(
     <div className="entriearea">
-    <span>1/19-10</span>
+    <span>1/19-11</span>
       <div className="space" />
 
         <Searchbar searchfield={this.state.searchfield} dosearch={this.dosearch} />
