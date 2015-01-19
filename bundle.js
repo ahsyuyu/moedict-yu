@@ -177,10 +177,10 @@ var maincomponent = React.createClass({displayName: "maincomponent",
   search_fulltext: function(tofind) {
     var that=this;
     var out=[];
-    // kse.search("moedict",tofind,{range:{start:0,maxseg:500}},function(err,data){
-    //   out=data.excerpt.map(function(item){return [item.segname,item.seg];});
-    //   that.setState({result:out});
-    // }) 
+    kse.search("moedict",tofind,{range:{start:0,maxseg:500}},function(err,data){
+      out=data.excerpt.map(function(item){return [item.segname,item.seg];});
+      that.setState({result:out});
+    }) 
   },
   getEntryIndexByTofind: function(tofind,entries) {
     var entriesIndex=[];
