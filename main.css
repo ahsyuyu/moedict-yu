@@ -95,6 +95,7 @@ a:hover{
     color:black;
     font-weight: 100;
     border:black 1px dashed;
+    text-align: center;
 }
 
 .highlight{

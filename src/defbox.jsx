@@ -67,13 +67,11 @@ var Defbox=React.createClass({
         defs.push("</div>")
       }
     }
-    
-    return(
-
-    <div className="defbox" dangerouslySetInnerHTML={{__html: defs.join("<br>")}} onClick={this.dosearch_history}/>
-
-    ); 
     if(debug) console.log("Finish Def render:",new Date());
+    return(
+    <div className="defbox" dangerouslySetInnerHTML={{__html: defs.join("<br>")}} onClick={this.dosearch_history}/>
+    ); 
+
   }
 });
 module.exports=Defbox;

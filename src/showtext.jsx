@@ -24,7 +24,6 @@ var Showtext=React.createClass({
     return (
     <div>
     	<Searchhistory popHistory={this.popHistory} defSearch={this.props.defSearch} dosearch={this.dosearch} gotoEntry={this.props.gotoEntry} entryHistory={this.state.entryHistory} result={this.props.result}/>
-      <br/>
     	<Defbox vpos={this.state.vpos} highlight={this.props.highlight} tofind={this.props.tofind} searchfield={this.props.searchfield} dosearch={this.dosearch} pushHistory={this.pushHistory} defs={this.props.defs} result={this.props.result} /> 	
     </div>
     );

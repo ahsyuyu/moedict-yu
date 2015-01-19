@@ -38,7 +38,7 @@ var Searchbar=React.createClass({
   render: function() {
     return(
   <div>
-  	<div className="center">
+  	<div>
   	  <div className="inline">
   	    <input className="maininput" type="text" ref="tofind" placeholder="請輸入字詞" defaultValue="點" onChange={this.dosearch_input}/>
   	  </div>    

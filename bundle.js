@@ -121,13 +121,11 @@ var Defbox=React.createClass({displayName: "Defbox",
         defs.push("</div>")
       }
     }
-    
-    return(
-
-    React.createElement("div", {className: "defbox", dangerouslySetInnerHTML: {__html: defs.join("<br>")}, onClick: this.dosearch_history})
-
-    ); 
     if(debug) console.log("Finish Def render:",new Date());
+    return(
+    React.createElement("div", {className: "defbox", dangerouslySetInnerHTML: {__html: defs.join("<br>")}, onClick: this.dosearch_history})
+    ); 
+
   }
 });
 module.exports=Defbox;
@@ -247,11 +245,9 @@ var maincomponent = React.createClass({displayName: "maincomponent",
     React.createElement("div", {className: "entriearea"}, 
     React.createElement("span", null, "1/19-9"), 
       React.createElement("div", {className: "space"}), 
-      React.createElement("div", {className: "toolbar"}, 
+
         React.createElement(Searchbar, {searchfield: this.state.searchfield, dosearch: this.dosearch}), 
         React.createElement(Overview, {searchfield: this.state.searchfield, result: this.state.result, gotoEntry: this.gotoEntry}), 
-        React.createElement("br", null)
-      ), 
         React.createElement(Showtext, {highlight: this.highlight, searchfield: this.state.searchfield, gotoEntry: this.gotoEntry, dosearch: this.dosearch, defSearch: this.defSearch, defs: this.state.defs, tofind: this.state.tofind, result: this.state.result})
     )
     );
@@ -290,7 +286,7 @@ var Overview=React.createClass({displayName: "Overview",
   	var res=this.props.result || "";
     if(res!="搜尋結果列表") resCounter=res.length;
     return(
-	React.createElement("div", {className: "center"}, 
+	React.createElement("div", null, 
 		React.createElement("select", {className: "resultlist", ref: "entryList", onChange: this.getDefFromEntryId}, 
     this.props.result.map(this.renderResult)
 		), 
@@ -341,7 +337,7 @@ var Searchbar=React.createClass({displayName: "Searchbar",
   render: function() {
     return(
   React.createElement("div", null, 
-  	React.createElement("div", {className: "center"}, 
+  	React.createElement("div", null, 
   	  React.createElement("div", {className: "inline"}, 
   	    React.createElement("input", {className: "maininput", type: "text", ref: "tofind", placeholder: "請輸入字詞", defaultValue: "點", onChange: this.dosearch_input})
   	  ), 
@@ -436,7 +432,6 @@ var Showtext=React.createClass({displayName: "Showtext",
     return (
     React.createElement("div", null, 
     	React.createElement(Searchhistory, {popHistory: this.popHistory, defSearch: this.props.defSearch, dosearch: this.dosearch, gotoEntry: this.props.gotoEntry, entryHistory: this.state.entryHistory, result: this.props.result}), 
-      React.createElement("br", null), 
     	React.createElement(Defbox, {vpos: this.state.vpos, highlight: this.props.highlight, tofind: this.props.tofind, searchfield: this.props.searchfield, dosearch: this.dosearch, pushHistory: this.pushHistory, defs: this.props.defs, result: this.props.result})	
     )
     );
