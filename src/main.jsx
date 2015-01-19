@@ -102,7 +102,7 @@ var maincomponent = React.createClass({
   },
   highlight: function(def,tofind,segid) {
     var out=[];
-    kse.highlightSeg(this.state.db,0,segid,{q:tofind},function(data){
+    kse.highlightSeg(this.state.db,0,segid,{q:tofind,span:true},function(data){
       out=data;
     });
     console.log(out.text);
