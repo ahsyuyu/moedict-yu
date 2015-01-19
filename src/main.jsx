@@ -87,12 +87,12 @@ var maincomponent = React.createClass({
     var that=this;
     var defs=[];
     this.setState({entryIndex:index});
-    // kde.open("moedict",function(err,db){
-    //   var def=db.get(["filecontents",0,index],function(data){
-    //     defs.push([data,index]);
-    //     that.setState({defs:defs});
-    //   });
-    // }); 
+    kde.open("moedict",function(err,db){
+      var def=db.get(["filecontents",0,index],function(data){
+        defs.push([data,index]);
+        that.setState({defs:defs});
+      });
+    }); 
     // kse.highlightSeg(this.state.db,0,index,{q:"薅"},function(data){//q:this.state.tofind
     //   //debugger;
     //   defs.push([data.text,index]);
@@ -111,7 +111,7 @@ var maincomponent = React.createClass({
   render: function() {
     return(
     <div className="entriearea">
-    <span>1/19-2</span>
+    <span>1/19-3</span>
       <div className="space" />
       <div className="center toolbar">
         <Searchbar searchfield={this.state.searchfield} dosearch={this.dosearch} />

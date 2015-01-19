@@ -221,12 +221,12 @@ var maincomponent = React.createClass({displayName: "maincomponent",
     var that=this;
     var defs=[];
     this.setState({entryIndex:index});
-    // kde.open("moedict",function(err,db){
-    //   var def=db.get(["filecontents",0,index],function(data){
-    //     defs.push([data,index]);
-    //     that.setState({defs:defs});
-    //   });
-    // }); 
+    kde.open("moedict",function(err,db){
+      var def=db.get(["filecontents",0,index],function(data){
+        defs.push([data,index]);
+        that.setState({defs:defs});
+      });
+    }); 
     // kse.highlightSeg(this.state.db,0,index,{q:"薅"},function(data){//q:this.state.tofind
     //   //debugger;
     //   defs.push([data.text,index]);
@@ -245,7 +245,7 @@ var maincomponent = React.createClass({displayName: "maincomponent",
   render: function() {
     return(
     React.createElement("div", {className: "entriearea"}, 
-    React.createElement("span", null, "1/19-2"), 
+    React.createElement("span", null, "1/19-3"), 
       React.createElement("div", {className: "space"}), 
       React.createElement("div", {className: "center toolbar"}, 
         React.createElement(Searchbar, {searchfield: this.state.searchfield, dosearch: this.dosearch}), 
