@@ -121,12 +121,13 @@ var Defbox=React.createClass({displayName: "Defbox",
         defs.push("</div>")
       }
     }
-    if(debug) console.log("Finish Def render:",new Date());
+    
     return(
 
     React.createElement("div", {className: "defbox", dangerouslySetInnerHTML: {__html: defs.join("<br>")}, onClick: this.dosearch_history})
 
     ); 
+    if(debug) console.log("Finish Def render:",new Date());
   }
 });
 module.exports=Defbox;
@@ -137,7 +138,7 @@ var api=require("./api");
 var Showtext=require("./showtext.jsx");
 var Searchbar=require("./searchbar.jsx");
 var Overview=require("./overview.jsx");
-var debug=true;
+var debug=false;
 var maincomponent = React.createClass({displayName: "maincomponent",
   getInitialState: function() {
     if(debug) console.log("getInitialState:",new Date());
@@ -226,7 +227,7 @@ var maincomponent = React.createClass({displayName: "maincomponent",
     //     that.setState({defs:defs});
     //   });
     // }); 
-    kse.highlightSeg(this.state.db,0,index,{q:"~"},function(data){//q:this.state.tofind
+    kse.highlightSeg(this.state.db,0,index,{q:"薅"},function(data){//q:this.state.tofind
       //debugger;
       defs.push([data.text,index]);
       that.setState({defs:defs});
@@ -250,7 +251,7 @@ var maincomponent = React.createClass({displayName: "maincomponent",
         React.createElement(Overview, {searchfield: this.state.searchfield, result: this.state.result, gotoEntry: this.gotoEntry}), 
         React.createElement("br", null)
       ), 
-      React.createElement(Showtext, {highlight: this.highlight, searchfield: this.state.searchfield, gotoEntry: this.gotoEntry, dosearch: this.dosearch, defSearch: this.defSearch, defs: this.state.defs, tofind: this.state.tofind, result: this.state.result})
+        React.createElement(Showtext, {highlight: this.highlight, searchfield: this.state.searchfield, gotoEntry: this.gotoEntry, dosearch: this.dosearch, defSearch: this.defSearch, defs: this.state.defs, tofind: this.state.tofind, result: this.state.result})
     )
     );
   }
@@ -433,7 +434,7 @@ var Showtext=React.createClass({displayName: "Showtext",
     React.createElement("div", null, 
     	React.createElement(Searchhistory, {popHistory: this.popHistory, defSearch: this.props.defSearch, dosearch: this.dosearch, gotoEntry: this.props.gotoEntry, entryHistory: this.state.entryHistory, result: this.props.result}), 
       React.createElement("br", null), 
-    	React.createElement(Defbox, {getClickedVpos: this.getClickedVpos, vpos: this.state.vpos, highlight: this.props.highlight, tofind: this.props.tofind, searchfield: this.props.searchfield, dosearch: this.dosearch, pushHistory: this.pushHistory, defs: this.props.defs, result: this.props.result})	
+    	React.createElement(Defbox, {vpos: this.state.vpos, highlight: this.props.highlight, tofind: this.props.tofind, searchfield: this.props.searchfield, dosearch: this.dosearch, pushHistory: this.pushHistory, defs: this.props.defs, result: this.props.result})	
     )
     );
   }

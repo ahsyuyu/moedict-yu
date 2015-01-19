@@ -4,7 +4,7 @@ var api=require("./api");
 var Showtext=require("./showtext.jsx");
 var Searchbar=require("./searchbar.jsx");
 var Overview=require("./overview.jsx");
-var debug=true;
+var debug=false;
 var maincomponent = React.createClass({
   getInitialState: function() {
     if(debug) console.log("getInitialState:",new Date());
@@ -93,7 +93,7 @@ var maincomponent = React.createClass({
     //     that.setState({defs:defs});
     //   });
     // }); 
-    kse.highlightSeg(this.state.db,0,index,{q:"~"},function(data){//q:this.state.tofind
+    kse.highlightSeg(this.state.db,0,index,{q:"薅"},function(data){//q:this.state.tofind
       //debugger;
       defs.push([data.text,index]);
       that.setState({defs:defs});
@@ -117,7 +117,7 @@ var maincomponent = React.createClass({
         <Overview searchfield={this.state.searchfield} result={this.state.result} gotoEntry={this.gotoEntry} />
         <br/>
       </div>
-      <Showtext highlight={this.highlight} searchfield={this.state.searchfield} gotoEntry={this.gotoEntry} dosearch={this.dosearch} defSearch={this.defSearch} defs={this.state.defs} tofind={this.state.tofind} result={this.state.result} />
+        <Showtext highlight={this.highlight} searchfield={this.state.searchfield} gotoEntry={this.gotoEntry} dosearch={this.dosearch} defSearch={this.defSearch} defs={this.state.defs} tofind={this.state.tofind} result={this.state.result} />
     </div>
     );
   }
