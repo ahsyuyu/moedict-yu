@@ -23,6 +23,7 @@
 
 .inline{
 	display: inline;
+	vertical-align: middle;
 }
 
 .counter {
@@ -70,12 +71,17 @@ a:hover{
 	background-color:black;
 }
 
+/*.vertical_middle {
+	position: absolute;
+	margin-top: -5;
+	text-align: center;
+}*/
+
 .radio-toolbar input[type="radio"] {
     display:none; 
 }
 
 .radio-toolbar label {
-	display: inline;
     display:inline-block;
     background-color:white;
     padding:0px 10px 10px 5px;
