@@ -375,6 +375,7 @@ var Searchhistory=React.createClass({displayName: "Searchhistory",
   goEntry: function(e) {
   	var entryIndex=e.target.parentElement.dataset.entry
   	var that=this;
+    //$('html, body').scrollTop($("div[class='title']").position().top);
   	this.props.entryHistory.map(function(item,index){
   		if(item[1]==entryIndex) {
   			if(index==0) {
