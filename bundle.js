@@ -218,7 +218,7 @@ var maincomponent = React.createClass({displayName: "maincomponent",
     if(debug) console.log("gotoEntry:",new Date());
     var that=this;
     var defs=[];
-    this.setState({entryIndex:index});
+    //this.setState({entryIndex:index});
     // kde.open("moedict",function(err,db){
     //   var def=db.get(["filecontents",0,index],function(data){
     //     defs.push([data,index]);
