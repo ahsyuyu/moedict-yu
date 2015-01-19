@@ -45,7 +45,7 @@ var maincomponent = React.createClass({
   search_fulltext: function(tofind) {
     var that=this;
     var out=[];
-    kse.search("moedict",tofind,{range:{start:0,maxseg:500}},function(err,data){
+    kse.search("moedict",tofind,{range:{start:0,maxseg:99}},function(err,data){
       out=data.excerpt.map(function(item){return [item.segname,item.seg];});
       that.setState({result:out});
     }) 
