@@ -339,24 +339,24 @@ var Searchbar=React.createClass({displayName: "Searchbar",
     return(
   React.createElement("div", null, 
   	React.createElement("div", null, 
-	  React.createElement("div", {className: "inline"}, 
-	    React.createElement("input", {className: "maininput", type: "text", ref: "tofind", placeholder: "請輸入字詞", defaultValue: "月", onChange: this.dosearch_input})
-	  ), 
-	  React.createElement("div", {className: "radio-toolbar inline vertical_middle", ref: "searchtype", onClick: this.dosearch_radio}, 
-      " ", React.createElement("label", {"data-type": "start", id: "checkedfield"}, 
-	      React.createElement("input", {type: "radio", name: "field", defaultChecked: true}, "頭")
-	    ), " ", 
-	    React.createElement("label", {"data-type": "end"}, 
-	      React.createElement("input", {type: "radio", name: "field"}, "尾")
-	    ), " ", 
-	    React.createElement("label", {"data-type": "middle"}, 
-	      React.createElement("input", {type: "radio", name: "field"}, "中")
-	    ), " ", 
-	    React.createElement("label", {"data-type": "fulltext"}, 
-	      React.createElement("input", {type: "radio", name: "field"}, "全")
-	    )
+  	  React.createElement("div", {className: "inline"}, 
+  	    React.createElement("input", {className: "maininput", type: "text", ref: "tofind", placeholder: "請輸入字詞", defaultValue: "月", onChange: this.dosearch_input})
+  	  ), 
+  	  React.createElement("div", {className: "radio-toolbar inline vertical_middle center", ref: "searchtype", onClick: this.dosearch_radio}, 
+        " ", React.createElement("label", {"data-type": "start", id: "checkedfield"}, 
+  	      React.createElement("input", {type: "radio", name: "field", defaultChecked: true}, "頭")
+  	    ), " ", 
+  	    React.createElement("label", {"data-type": "end"}, 
+  	      React.createElement("input", {type: "radio", name: "field"}, "尾")
+  	    ), " ", 
+  	    React.createElement("label", {"data-type": "middle"}, 
+  	      React.createElement("input", {type: "radio", name: "field"}, "中")
+  	    ), " ", 
+  	    React.createElement("label", {"data-type": "fulltext"}, 
+  	      React.createElement("input", {type: "radio", name: "field"}, "全")
+  	    )
+  	  )
 	  )
-	)
   )
     	
     ); 

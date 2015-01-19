@@ -36,24 +36,24 @@ var Searchbar=React.createClass({
     return(
   <div>
   	<div>
-	  <div className="inline">
-	    <input className="maininput" type="text" ref="tofind" placeholder="請輸入字詞" defaultValue="月" onChange={this.dosearch_input}/>
-	  </div>    
-	  <div className="radio-toolbar inline vertical_middle" ref="searchtype" onClick={this.dosearch_radio}>
-      &nbsp;<label data-type="start" id="checkedfield">
-	      <input type="radio" name="field" defaultChecked>頭</input>
-	    </label>&nbsp;
-	    <label data-type="end">
-	      <input type="radio" name="field">尾</input>
-	    </label>&nbsp;
-	    <label data-type="middle">
-	      <input type="radio" name="field">中</input>
-	    </label>&nbsp;
-	    <label data-type="fulltext">
-	      <input type="radio" name="field">全</input>
-	    </label>
+  	  <div className="inline">
+  	    <input className="maininput" type="text" ref="tofind" placeholder="請輸入字詞" defaultValue="月" onChange={this.dosearch_input}/>
+  	  </div>    
+  	  <div className="radio-toolbar inline vertical_middle center" ref="searchtype" onClick={this.dosearch_radio}>
+        &nbsp;<label data-type="start" id="checkedfield">
+  	      <input type="radio" name="field" defaultChecked>頭</input>
+  	    </label>&nbsp;
+  	    <label data-type="end">
+  	      <input type="radio" name="field">尾</input>
+  	    </label>&nbsp;
+  	    <label data-type="middle">
+  	      <input type="radio" name="field">中</input>
+  	    </label>&nbsp;
+  	    <label data-type="fulltext">
+  	      <input type="radio" name="field">全</input>
+  	    </label>
+  	  </div>
 	  </div>
-	</div>
   </div>
     	
     ); 
