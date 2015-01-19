@@ -177,10 +177,10 @@ var maincomponent = React.createClass({displayName: "maincomponent",
   search_fulltext: function(tofind) {
     var that=this;
     var out=[];
-    kse.search("moedict",tofind,{range:{start:0,maxseg:500}},function(err,data){
-      out=data.excerpt.map(function(item){return [item.segname,item.seg];});
-      that.setState({result:out});
-    }) 
+    // kse.search("moedict",tofind,{range:{start:0,maxseg:500}},function(err,data){
+    //   out=data.excerpt.map(function(item){return [item.segname,item.seg];});
+    //   that.setState({result:out});
+    // }) 
   },
   getEntryIndexByTofind: function(tofind,entries) {
     var entriesIndex=[];
@@ -243,9 +243,7 @@ var maincomponent = React.createClass({displayName: "maincomponent",
   render: function() {
     return(
     React.createElement("div", {className: "entriearea"}, 
-    React.createElement("span", null, "1/19-11"), 
       React.createElement("div", {className: "space"}), 
-
         React.createElement(Searchbar, {searchfield: this.state.searchfield, dosearch: this.dosearch}), 
         React.createElement(Overview, {searchfield: this.state.searchfield, result: this.state.result, gotoEntry: this.gotoEntry}), 
         React.createElement(Showtext, {highlight: this.highlight, searchfield: this.state.searchfield, gotoEntry: this.gotoEntry, dosearch: this.dosearch, defSearch: this.defSearch, defs: this.state.defs, tofind: this.state.tofind, result: this.state.result})
@@ -301,13 +299,13 @@ var Searchbar=React.createClass({displayName: "Searchbar",
   getInitialState: function() {
   	return {field:[],tofind:[],ckeckRadio:false};
   },
-  // componentDidMount: function() {
-  //   var that=this;
-  // 	var tofind=this.refs.tofind.getDOMNode().value;
-  //   setTimeout(function(){
-  //    that.props.dosearch(tofind,"start");//this.props.searchfield
-  //   },500);
-  // },
+  componentDidMount: function() {
+    var that=this;
+  	var tofind=this.refs.tofind.getDOMNode().value;
+    setTimeout(function(){
+     that.props.dosearch(tofind,"start");//this.props.searchfield
+    },500);
+  },
   componentWillUpdate: function() {
   	//$("label[data-type='"+this.state.field+"']").
 	$("label[data-type='"+this.state.field+"']").attr('id', 'checkedfield');

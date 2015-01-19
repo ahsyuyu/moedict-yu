@@ -45,10 +45,10 @@ var maincomponent = React.createClass({
   search_fulltext: function(tofind) {
     var that=this;
     var out=[];
-    kse.search("moedict",tofind,{range:{start:0,maxseg:500}},function(err,data){
-      out=data.excerpt.map(function(item){return [item.segname,item.seg];});
-      that.setState({result:out});
-    }) 
+    // kse.search("moedict",tofind,{range:{start:0,maxseg:500}},function(err,data){
+    //   out=data.excerpt.map(function(item){return [item.segname,item.seg];});
+    //   that.setState({result:out});
+    // }) 
   },
   getEntryIndexByTofind: function(tofind,entries) {
     var entriesIndex=[];
@@ -111,9 +111,7 @@ var maincomponent = React.createClass({
   render: function() {
     return(
     <div className="entriearea">
-    <span>1/19-11</span>
       <div className="space" />
-
         <Searchbar searchfield={this.state.searchfield} dosearch={this.dosearch} />
         <Overview searchfield={this.state.searchfield} result={this.state.result} gotoEntry={this.gotoEntry} />
         <Showtext highlight={this.highlight} searchfield={this.state.searchfield} gotoEntry={this.gotoEntry} dosearch={this.dosearch} defSearch={this.defSearch} defs={this.state.defs} tofind={this.state.tofind} result={this.state.result} />
