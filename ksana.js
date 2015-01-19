@@ -2,7 +2,7 @@ jsonp_handler({
  "version": "1",
  "build": 195,
  "title": "moedict-yu",
- "minruntime": 4,
+ "minruntime": 1.3,
  "baseurl": "http://rawgit.com/ahsyuyu/moedict-yu/master/",
  "description": "",
  "files": [
