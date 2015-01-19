@@ -305,13 +305,13 @@ var Searchbar=React.createClass({displayName: "Searchbar",
   getInitialState: function() {
   	return {field:[],tofind:[],ckeckRadio:false};
   },
-  componentDidMount: function() {
-    var that=this;
-  	var tofind=this.refs.tofind.getDOMNode().value;
-    setTimeout(function(){
-     that.props.dosearch(tofind,"start");//this.props.searchfield
-    },500);
-  },
+  // componentDidMount: function() {
+  //   var that=this;
+  // 	var tofind=this.refs.tofind.getDOMNode().value;
+  //   setTimeout(function(){
+  //    that.props.dosearch(tofind,"start");//this.props.searchfield
+  //   },500);
+  // },
   componentWillUpdate: function() {
   	//$("label[data-type='"+this.state.field+"']").
 	$("label[data-type='"+this.state.field+"']").attr('id', 'checkedfield');
