@@ -87,7 +87,7 @@ a:hover{
 .radio-toolbar label {
     display:inline-block;
     background-color:white;
-    padding:0px 10px 10px 5px;
+    /*padding:0px 10px 10px 5px;*/
     font-size:16px;
     font-size: 100%;
     width:40px;height:40px;

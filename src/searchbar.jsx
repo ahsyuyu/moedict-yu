@@ -2,13 +2,13 @@ var Searchbar=React.createClass({
   getInitialState: function() {
   	return {field:[],tofind:[],ckeckRadio:false};
   },
-  // componentDidMount: function() {
-  //   var that=this;
-  // 	var tofind=this.refs.tofind.getDOMNode().value;
-  //   setTimeout(function(){
-  //    that.props.dosearch(tofind,"start");//this.props.searchfield
-  //   },500);
-  // },
+  componentDidMount: function() {
+    var that=this;
+  	var tofind=this.refs.tofind.getDOMNode().value;
+    setTimeout(function(){
+     that.props.dosearch(tofind,"start");//this.props.searchfield
+    },500);
+  },
   componentWillUpdate: function() {
   	//$("label[data-type='"+this.state.field+"']").
 	$("label[data-type='"+this.state.field+"']").attr('id', 'checkedfield');
@@ -38,11 +38,11 @@ var Searchbar=React.createClass({
   render: function() {
     return(
   <div>
-  	<div>
+  	<div className="center">
   	  <div className="inline">
   	    <input className="maininput" type="text" ref="tofind" placeholder="請輸入字詞" defaultValue="點" onChange={this.dosearch_input}/>
   	  </div>    
-  	  <div className="radio-toolbar inline vertical_middle center" ref="searchtype" onClick={this.dosearch_radio}>
+  	  <div className="radio-toolbar inline vertical_middle" ref="searchtype" onClick={this.dosearch_radio}>
         &nbsp;<label data-type="start" id="checkedfield">
   	      <input type="radio" name="field" defaultChecked>頭</input>
   	    </label>&nbsp;

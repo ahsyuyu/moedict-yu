@@ -305,13 +305,13 @@ var Searchbar=React.createClass({displayName: "Searchbar",
   getInitialState: function() {
   	return {field:[],tofind:[],ckeckRadio:false};
   },
-  // componentDidMount: function() {
-  //   var that=this;
-  // 	var tofind=this.refs.tofind.getDOMNode().value;
-  //   setTimeout(function(){
-  //    that.props.dosearch(tofind,"start");//this.props.searchfield
-  //   },500);
-  // },
+  componentDidMount: function() {
+    var that=this;
+  	var tofind=this.refs.tofind.getDOMNode().value;
+    setTimeout(function(){
+     that.props.dosearch(tofind,"start");//this.props.searchfield
+    },500);
+  },
   componentWillUpdate: function() {
   	//$("label[data-type='"+this.state.field+"']").
 	$("label[data-type='"+this.state.field+"']").attr('id', 'checkedfield');
@@ -341,11 +341,11 @@ var Searchbar=React.createClass({displayName: "Searchbar",
   render: function() {
     return(
   React.createElement("div", null, 
-  	React.createElement("div", null, 
+  	React.createElement("div", {className: "center"}, 
   	  React.createElement("div", {className: "inline"}, 
   	    React.createElement("input", {className: "maininput", type: "text", ref: "tofind", placeholder: "請輸入字詞", defaultValue: "點", onChange: this.dosearch_input})
   	  ), 
-  	  React.createElement("div", {className: "radio-toolbar inline vertical_middle center", ref: "searchtype", onClick: this.dosearch_radio}, 
+  	  React.createElement("div", {className: "radio-toolbar inline vertical_middle", ref: "searchtype", onClick: this.dosearch_radio}, 
         " ", React.createElement("label", {"data-type": "start", id: "checkedfield"}, 
   	      React.createElement("input", {type: "radio", name: "field", defaultChecked: true}, "頭")
   	    ), " ", 
