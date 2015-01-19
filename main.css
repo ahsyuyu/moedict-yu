@@ -23,7 +23,7 @@
 
 .inline{
 	display: inline;
-	text-align: left;
+	float: left;
 }
 
 .counter {
