@@ -36,8 +36,8 @@
 .resultlist{
 	border-radius: 0px;
 	border: white 1px solid;/*#333*/
-	background-color: #5B5B5B;
-	color: white;
+	/*background-color: #5B5B5B;*/
+	color: black;
 	word-wrap:break-word;
 	max-width:250px;
 	min-width:250px;

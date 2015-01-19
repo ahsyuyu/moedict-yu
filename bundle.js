@@ -212,7 +212,7 @@ var maincomponent = React.createClass({displayName: "maincomponent",
           defs.push([data.text,idx]);
           if(defs.length==eIdx.length)that.setState({defs:defs}); //eIdx.length 可以用，因為這個值不變
         });      
-      })(eIdx[i]);
+      } )(eIdx[i]);
     }
 
   },
@@ -245,7 +245,7 @@ var maincomponent = React.createClass({displayName: "maincomponent",
   render: function() {
     return(
     React.createElement("div", {className: "entriearea"}, 
-    React.createElement("span", null, "1/19-3"), 
+    React.createElement("span", null, "1/19-4"), 
       React.createElement("div", {className: "space"}), 
       React.createElement("div", {className: "center toolbar"}, 
         React.createElement(Searchbar, {searchfield: this.state.searchfield, dosearch: this.dosearch}), 

@@ -78,7 +78,7 @@ var maincomponent = React.createClass({
           defs.push([data.text,idx]);
           if(defs.length==eIdx.length)that.setState({defs:defs}); //eIdx.length 可以用，因為這個值不變
         });      
-      })(eIdx[i]);
+      } )(eIdx[i]);
     }
 
   },
@@ -111,7 +111,7 @@ var maincomponent = React.createClass({
   render: function() {
     return(
     <div className="entriearea">
-    <span>1/19-3</span>
+    <span>1/19-4</span>
       <div className="space" />
       <div className="center toolbar">
         <Searchbar searchfield={this.state.searchfield} dosearch={this.dosearch} />
