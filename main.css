@@ -23,7 +23,7 @@
 
 .inline{
 	display: inline;
-	vertical-align: middle;
+	text-align: left;
 }
 
 .counter {
@@ -75,6 +75,10 @@ a:hover{
 	margin-top: 5;
 	position: absolute;
 }
+
+/*.inputBox {
+	float: left;
+}*/
 
 .radio-toolbar input[type="radio"] {
     display:none; 
