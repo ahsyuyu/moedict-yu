@@ -73,7 +73,7 @@ var maincomponent = React.createClass({
     // }
     for(var i=0;i<eIdx.length;i++){
       (function(idx) {  //用參數idx 保存 eIdx[i]的值
-        kse.highlightSeg(that.state.db,0,idx,{q:"~"},function(data){//that.state.entries[idx]
+        kse.highlightSeg(that.state.db,0,idx,{span:true},function(data){//that.state.entries[idx]
                   //debugger;//強迫停在這裡觀察
           defs.push([data.text,idx]);
           if(defs.length==eIdx.length)that.setState({defs:defs}); //eIdx.length 可以用，因為這個值不變
@@ -87,17 +87,17 @@ var maincomponent = React.createClass({
     var that=this;
     var defs=[];
     this.setState({entryIndex:index});
-    kde.open("moedict",function(err,db){
-      var def=db.get(["filecontents",0,index],function(data){
-        defs.push([data,index]);
-        that.setState({defs:defs});
-      });
-    }); 
-    // kse.highlightSeg(this.state.db,0,index,{q:"薅"},function(data){//q:this.state.tofind
-    //   //debugger;
-    //   defs.push([data.text,index]);
-    //   that.setState({defs:defs});
-    // });
+    // kde.open("moedict",function(err,db){
+    //   var def=db.get(["filecontents",0,index],function(data){
+    //     defs.push([data,index]);
+    //     that.setState({defs:defs});
+    //   });
+    // }); 
+    kse.highlightSeg(this.state.db,0,index,{span:true},function(data){//q:this.state.tofind
+      //debugger;
+      defs.push([data.text,index]);
+      that.setState({defs:defs});
+    });
     
   },
   highlight: function(def,tofind,segid) {
@@ -111,7 +111,7 @@ var maincomponent = React.createClass({
   render: function() {
     return(
     <div className="entriearea">
-    <span>1/19-4</span>
+    <span>1/19-5</span>
       <div className="space" />
       <div className="center toolbar">
         <Searchbar searchfield={this.state.searchfield} dosearch={this.dosearch} />

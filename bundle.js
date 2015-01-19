@@ -207,7 +207,7 @@ var maincomponent = React.createClass({displayName: "maincomponent",
     // }
     for(var i=0;i<eIdx.length;i++){
       (function(idx) {  //用參數idx 保存 eIdx[i]的值
-        kse.highlightSeg(that.state.db,0,idx,{q:"~"},function(data){//that.state.entries[idx]
+        kse.highlightSeg(that.state.db,0,idx,{span:true},function(data){//that.state.entries[idx]
                   //debugger;//強迫停在這裡觀察
           defs.push([data.text,idx]);
           if(defs.length==eIdx.length)that.setState({defs:defs}); //eIdx.length 可以用，因為這個值不變
@@ -221,17 +221,17 @@ var maincomponent = React.createClass({displayName: "maincomponent",
     var that=this;
     var defs=[];
     this.setState({entryIndex:index});
-    kde.open("moedict",function(err,db){
-      var def=db.get(["filecontents",0,index],function(data){
-        defs.push([data,index]);
-        that.setState({defs:defs});
-      });
-    }); 
-    // kse.highlightSeg(this.state.db,0,index,{q:"薅"},function(data){//q:this.state.tofind
-    //   //debugger;
-    //   defs.push([data.text,index]);
-    //   that.setState({defs:defs});
-    // });
+    // kde.open("moedict",function(err,db){
+    //   var def=db.get(["filecontents",0,index],function(data){
+    //     defs.push([data,index]);
+    //     that.setState({defs:defs});
+    //   });
+    // }); 
+    kse.highlightSeg(this.state.db,0,index,{span:true},function(data){//q:this.state.tofind
+      //debugger;
+      defs.push([data.text,index]);
+      that.setState({defs:defs});
+    });
     
   },
   highlight: function(def,tofind,segid) {
@@ -339,12 +339,12 @@ var Searchbar=React.createClass({displayName: "Searchbar",
     return(
   React.createElement("div", null, 
   	React.createElement("div", null, 
-	  React.createElement("div", null, 
+	  React.createElement("div", {className: "inline"}, 
 	    React.createElement("input", {className: "maininput", type: "text", ref: "tofind", placeholder: "請輸入字詞", defaultValue: "月", onChange: this.dosearch_input})
 	  ), 
-	  React.createElement("div", {className: "space"}), 
-	  React.createElement("div", {className: "radio-toolbar", ref: "searchtype", onClick: this.dosearch_radio}, 
-	    React.createElement("label", {"data-type": "start", id: "checkedfield"}, 
+	  React.createElement("div", {className: "radio-toolbar inline", ref: "searchtype", onClick: this.dosearch_radio}, 
+	    "  ", 
+      React.createElement("label", {"data-type": "start", id: "checkedfield"}, 
 	      React.createElement("input", {type: "radio", name: "field", defaultChecked: true}, "頭")
 	    ), "  ", 
 	    React.createElement("label", {"data-type": "end"}, 
@@ -867,6 +867,11 @@ var fileSegFromVpos=function(vpos) {
 	var i=bsearch(segoffsets,vpos,true);
 	return absSegToFileSeg.apply(this,[i]);
 }
+var fileSegToVpos=function(f,s) {
+	var segoffsets=this.get(["segoffsets"]);
+	var seg=fileSegToAbsSeg(f,s);
+	return segoffsets[seg];
+}
 
 var getFileSegNames=function(i) {
 	var range=getFileRange.apply(this,[i]);
@@ -929,6 +934,7 @@ var createLocalEngine=function(kdb,opts,cb,context) {
 	engine.absSegToFileSeg=absSegToFileSeg;
 	engine.fileSegToAbsSeg=fileSegToAbsSeg;
 	engine.fileSegFromVpos=fileSegFromVpos;
+	engine.fileSegToVpos=fileSegToVpos;
 	
 	//engine.fileSegToVpos=fileSegToVpos;
 	//engine.vposToFileSeg=vposToFileSeg;
@@ -3238,6 +3244,15 @@ var highlight=function(Q,opts) {
 	return {text:injectTag(Q,opt),hits:opt.hits};
 }
 
+var addspan=function(text,startvpos){
+	engine=this;
+	var output="";
+	var tokens=engine.analyzer.tokenize(text).tokens;
+	for (var i=0;i<tokens.length;i++) {
+		output+='<span vpos="'+(i+startvpos)+'">'+tokens[i]+"</span>";
+	}
+	return output;
+}
 var getSeg=function(engine,fileid,segid,opts,cb,context) {
 	if (typeof opts=="function") {
 		context=cb;
@@ -3248,9 +3263,10 @@ var getSeg=function(engine,fileid,segid,opts,cb,context) {
 	var fileOffsets=engine.get("fileoffsets");
 	var segpaths=["filecontents",fileid,segid];
 	var segnames=engine.getFileSegNames(fileid);
+	var vpos=engine.fileSegToVpos(fileid,segid);
 
 	engine.get(segpaths,function(text){
-		//if (opts.span) text=addspan.apply(engine,[text]);
+		if (opts.span) text=addspan.apply(engine,[text,vpos]);
 		cb.apply(context||engine.context,[{text:text,file:fileid,seg:segid,segname:segnames[segid]}]);
 	});
 }
@@ -3338,10 +3354,10 @@ var highlightSeg=function(Q,fileid,segid,opts,cb,context) {
 	this.getSeg(Q.engine,fileid,segid,function(res){
 		var opt={text:res.text,hits:null,vpos:startvpos,fulltext:true,
 			nospan:opts.nospan,nocrlf:opts.nocrlf};
-		opt.hits=hitInRange(Q,startvpos,endvpos);
-		if (opts.renderTags) {
-			opt.tags=tagsInRange(Q,opts.renderTags,startvpos,endvpos);
-		}
+			opt.hits=hitInRange(Q,startvpos,endvpos);
+			if (opts.renderTags) {
+				opt.tags=tagsInRange(Q,opts.renderTags,startvpos,endvpos);
+			}
 
 		var segname=segnames[segid];
 		cb.apply(context||Q.engine.context,[{text:injectTag(Q,opt),seg:segid,file:fileid,hits:opt.hits,segname:segname}]);
@@ -3367,16 +3383,17 @@ var bsearch=require("./bsearch");
 var dosearch=require("./search");
 
 var prepareEngineForSearch=function(engine,cb){
-	if (engine.analyzer) {
+	if (engine.get("tokens") && engine.tokenizer) {
 		cb();
 		return;
 	}
 
 	engine.get([["tokens"],["postingslength"]],function(){
-		var analyzer=require("ksana-analyzer");
-		var config=engine.get("meta").config;
-		engine.analyzer=analyzer.getAPI(config);
-
+		if (!engine.analyzer) {
+			var analyzer=require("ksana-analyzer");
+			var config=engine.get("meta").config;
+			engine.analyzer=analyzer.getAPI(config);			
+		}
 		cb();
 	});
 }
@@ -3410,6 +3427,11 @@ var _search=function(engine,q,opts,cb,context) {
 
 var _highlightSeg=function(engine,fileid,segid,opts,cb,context){
 	if (!opts.q) {
+		if (!engine.analyzer) {
+			var analyzer=require("ksana-analyzer");
+			var config=engine.get("meta").config;
+			engine.analyzer=analyzer.getAPI(config);			
+		}
 		api.excerpt.getSeg(engine,fileid,segid,opts,cb,context);
 	} else {
 		_search(engine,opts.q,opts,function(err,Q){
