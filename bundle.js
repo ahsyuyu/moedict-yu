@@ -245,6 +245,7 @@ var maincomponent = React.createClass({displayName: "maincomponent",
   render: function() {
     return(
     React.createElement("div", {className: "entriearea"}, 
+    React.createElement("span", null, "1/19-8"), 
       React.createElement("div", {className: "space"}), 
       React.createElement("div", {className: "center toolbar"}, 
         React.createElement(Searchbar, {searchfield: this.state.searchfield, dosearch: this.dosearch}), 
@@ -341,7 +342,7 @@ var Searchbar=React.createClass({displayName: "Searchbar",
 	  React.createElement("div", {className: "inline"}, 
 	    React.createElement("input", {className: "maininput", type: "text", ref: "tofind", placeholder: "請輸入字詞", defaultValue: "月", onChange: this.dosearch_input})
 	  ), 
-	  React.createElement("div", {className: "radio-toolbar inline", ref: "searchtype", onClick: this.dosearch_radio}, 
+	  React.createElement("div", {className: "radio-toolbar inline vertical_middle", ref: "searchtype", onClick: this.dosearch_radio}, 
       " ", React.createElement("label", {"data-type": "start", id: "checkedfield"}, 
 	      React.createElement("input", {type: "radio", name: "field", defaultChecked: true}, "頭")
 	    ), " ", 

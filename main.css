@@ -71,11 +71,10 @@ a:hover{
 	background-color:black;
 }
 
-/*.vertical_middle {
+.vertical_middle {
+	margin-top: 5;
 	position: absolute;
-	margin-top: -5;
-	text-align: center;
-}*/
+}
 
 .radio-toolbar input[type="radio"] {
     display:none; 
