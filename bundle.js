@@ -245,9 +245,9 @@ var maincomponent = React.createClass({displayName: "maincomponent",
   render: function() {
     return(
     React.createElement("div", {className: "entriearea"}, 
-    React.createElement("span", null, "1/19-10"), 
+    React.createElement("span", null, "1/19-9"), 
       React.createElement("div", {className: "space"}), 
-      React.createElement("div", null, 
+      React.createElement("div", {className: "toolbar"}, 
         React.createElement(Searchbar, {searchfield: this.state.searchfield, dosearch: this.dosearch}), 
         React.createElement(Overview, {searchfield: this.state.searchfield, result: this.state.result, gotoEntry: this.gotoEntry}), 
         React.createElement("br", null)
@@ -290,7 +290,7 @@ var Overview=React.createClass({displayName: "Overview",
   	var res=this.props.result || "";
     if(res!="搜尋結果列表") resCounter=res.length;
     return(
-	React.createElement("div", null, 
+	React.createElement("div", {className: "center"}, 
 		React.createElement("select", {className: "resultlist", ref: "entryList", onChange: this.getDefFromEntryId}, 
     this.props.result.map(this.renderResult)
 		), 
