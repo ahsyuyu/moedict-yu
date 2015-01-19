@@ -245,6 +245,7 @@ var maincomponent = React.createClass({displayName: "maincomponent",
   render: function() {
     return(
     React.createElement("div", {className: "entriearea"}, 
+    React.createElement("span", null, "1/19-1"), 
       React.createElement("div", {className: "space"}), 
       React.createElement("div", {className: "center toolbar"}, 
         React.createElement(Searchbar, {searchfield: this.state.searchfield, dosearch: this.dosearch}), 
