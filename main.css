@@ -2,7 +2,7 @@
  /*src: url("font/NotoSansCJKtc-Light.otf"); */
  	font-weight: 100;
  	font-family: "Microsoft JhengHei";
- 	margin-top: 25px;
+ 	margin-top: 10px;
  	margin-left: 25px;
  	margin-right: 25px;
 }
@@ -33,7 +33,7 @@
 	word-wrap:break-word;
 	max-width:250px;
 	min-width:250px;
-	-webkit-appearance: none;
+	-moz-appearance: none;
 	text-align: center;
 }
 
