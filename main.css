@@ -101,7 +101,8 @@ a:hover{
     border-radius: 100%;
     color:black;
     font-weight: 100;
-    border:black 1px dashed;
+    /*border:black 1px dashed;*/
+    border: #BEBEBE 1px solid;
     text-align: center;
 }
 
