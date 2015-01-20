@@ -2,6 +2,7 @@
  /*src: url("font/NotoSansCJKtc-Light.otf"); */
  	font-weight: 100;
  	font-family: "Microsoft JhengHei";
+ 	margin: 50px;
 }
 
 .center{text-align: center;}
@@ -46,8 +47,10 @@ a:hover{
 
 .title{
 	font-size: 150%;
-	background-color:#9D9D9D;
-	color:white;
+	/*background-color:#9D9D9D;
+	color:white;*/
+	border-top: #BEBEBE 1px solid;
+	border-bottom: #BEBEBE 1px solid;
 }
 
 #checkedfield {
