@@ -159,15 +159,15 @@ var maincomponent = React.createClass({displayName: "maincomponent",
     if(tofind != ""){
       if(field=="start"){
         if(this.state.entries.length != 0) out=api.search_start(this.state.entries,tofind);
-        this.setState({result:out});
+        this.setState({result:out,fulltextResultLength:null});
       }
       if(field=="end"){
         out=api.search_end(this.state.entries,tofind);       
-        this.setState({result:out});
+        this.setState({result:out,fulltextResultLength:null});
       }
       if(field=="middle"){
         out=api.search_middle(this.state.entries,tofind);
-        this.setState({result:out});
+        this.setState({result:out,fulltextResultLength:null});
       }
       if(field=="fulltext"){
         this.search_fulltext(tofind);
@@ -179,7 +179,7 @@ var maincomponent = React.createClass({displayName: "maincomponent",
     var out=[];
     kse.search("moedict",tofind,{range:{start:0,maxseg:99}},function(err,data){
       out=data.excerpt.map(function(item){return [item.segname,item.seg];});
-      that.setState({result:out});
+      that.setState({result:out,fulltextResultLength:data.rawresult.length});
     }) 
     // out=[["一丁點",132],["一班半點",854],["一點",1332]];
     // this.setState({result:out});
@@ -247,7 +247,7 @@ var maincomponent = React.createClass({displayName: "maincomponent",
     "3", 
       React.createElement("div", {className: "space"}), 
         React.createElement(Searchbar, {searchfield: this.state.searchfield, dosearch: this.dosearch}), 
-        React.createElement(Overview, {searchfield: this.state.searchfield, result: this.state.result, gotoEntry: this.gotoEntry}), 
+        React.createElement(Overview, {searchfield: this.state.searchfield, result: this.state.result, gotoEntry: this.gotoEntry, fulltextResultLength: this.state.fulltextResultLength}), 
         React.createElement(Showtext, {highlight: this.highlight, searchfield: this.state.searchfield, gotoEntry: this.gotoEntry, dosearch: this.dosearch, defSearch: this.defSearch, defs: this.state.defs, tofind: this.state.tofind, result: this.state.result})
     )
     );
@@ -284,7 +284,10 @@ var Overview=React.createClass({displayName: "Overview",
   render: function() {
     var resCounter=0;
   	var res=this.props.result || "";
-    if(res!="搜尋結果列表") resCounter=res.length;
+    if(res!="搜尋結果列表") {
+      if(!this.props.fulltextResultLength) resCounter=res.length;
+      else resCounter=this.props.fulltextResultLength;
+    }
     return(
 	React.createElement("div", null, 
 		React.createElement("select", {className: "resultlist", ref: "entryList", onChange: this.getDefFromEntryId}, 

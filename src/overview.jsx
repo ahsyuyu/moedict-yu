@@ -27,7 +27,10 @@ var Overview=React.createClass({
   render: function() {
     var resCounter=0;
   	var res=this.props.result || "";
-    if(res!="搜尋結果列表") resCounter=res.length;
+    if(res!="搜尋結果列表") {
+      if(!this.props.fulltextResultLength) resCounter=res.length;
+      else resCounter=this.props.fulltextResultLength;
+    }
     return(
 	<div>
 		<select className="resultlist" ref="entryList" onChange={this.getDefFromEntryId}>
