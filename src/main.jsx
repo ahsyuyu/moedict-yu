@@ -45,10 +45,12 @@ var maincomponent = React.createClass({
   search_fulltext: function(tofind) {
     var that=this;
     var out=[];
-    kse.search("moedict",tofind,{range:{start:0,maxseg:99}},function(err,data){
-      out=data.excerpt.map(function(item){return [item.segname,item.seg];});
-      that.setState({result:out});
-    }) 
+    // kse.search("moedict",tofind,{range:{start:0,maxseg:99}},function(err,data){
+    //   out=data.excerpt.map(function(item){return [item.segname,item.seg];});
+    //   that.setState({result:out});
+    // }) 
+    out=[["一丁點",132],["一班半點",854],["一點",1332]];
+    this.setState({result:out});
   },
   getEntryIndexByTofind: function(tofind,entries) {
     var entriesIndex=[];
@@ -105,13 +107,12 @@ var maincomponent = React.createClass({
     kse.highlightSeg(this.state.db,0,segid,{q:tofind,span:true},function(data){
       out=data;
     });
-    console.log(out.text);
     return out;
   },
   render: function() {
     return(
     <div className="entriearea">
-    1
+    2
       <div className="space" />
         <Searchbar searchfield={this.state.searchfield} dosearch={this.dosearch} />
         <Overview searchfield={this.state.searchfield} result={this.state.result} gotoEntry={this.gotoEntry} />
