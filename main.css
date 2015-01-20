@@ -23,9 +23,9 @@
 }
 
 .resultlist{
-	border-radius: 0px;
-	border: white 1px solid;/*#333*/
-	/*background-color: #5B5B5B;*/
+	border-radius: 100px;
+	border: #BEBEBE 1px solid;/*#333*/
+	background-color: white;
 	color: black;
 	word-wrap:break-word;
 	max-width:250px;
@@ -46,7 +46,7 @@ a:hover{
 
 .title{
 	font-size: 150%;
-	background-color:#5B5B5B;
+	background-color:#9D9D9D;
 	color:white;
 }
 

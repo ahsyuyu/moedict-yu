@@ -244,10 +244,11 @@ var maincomponent = React.createClass({displayName: "maincomponent",
   render: function() {
     return(
     React.createElement("div", {className: "entriearea"}, 
-    "3", 
       React.createElement("div", {className: "space"}), 
         React.createElement(Searchbar, {searchfield: this.state.searchfield, dosearch: this.dosearch}), 
+      React.createElement("div", {className: "space"}), 
         React.createElement(Overview, {searchfield: this.state.searchfield, result: this.state.result, gotoEntry: this.gotoEntry, fulltextResultLength: this.state.fulltextResultLength}), 
+      React.createElement("div", {className: "space"}), 
         React.createElement(Showtext, {highlight: this.highlight, searchfield: this.state.searchfield, gotoEntry: this.gotoEntry, dosearch: this.dosearch, defSearch: this.defSearch, defs: this.state.defs, tofind: this.state.tofind, result: this.state.result})
     )
     );
