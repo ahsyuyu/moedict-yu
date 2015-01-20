@@ -179,8 +179,7 @@ var maincomponent = React.createClass({displayName: "maincomponent",
     var out=[];
     kse.search("moedict",tofind,{range:{start:0,maxseg:99}},function(err,data){
       out=data.excerpt.map(function(item){return [item.segname,item.seg];});
-      //that.setState({result:out});
-      that.setState({result:[["一丁點",132],["一班半點",854],["一點",1332]]});
+      that.setState({result:out});
     }) 
     // out=[["一丁點",132],["一班半點",854],["一點",1332]];
     // this.setState({result:out});
@@ -245,7 +244,7 @@ var maincomponent = React.createClass({displayName: "maincomponent",
   render: function() {
     return(
     React.createElement("div", {className: "entriearea"}, 
-    "2", 
+    "3", 
       React.createElement("div", {className: "space"}), 
         React.createElement(Searchbar, {searchfield: this.state.searchfield, dosearch: this.dosearch}), 
         React.createElement(Overview, {searchfield: this.state.searchfield, result: this.state.result, gotoEntry: this.gotoEntry}), 
