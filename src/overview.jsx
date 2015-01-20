@@ -31,6 +31,7 @@ var Overview=React.createClass({
       if(!this.props.fulltextResultLength) resCounter=res.length;
       else resCounter=this.props.fulltextResultLength;
     }
+    //if(res.length==0) res=[["沒有結果"]];
     return(
 	<div>
 		<select className="resultlist" ref="entryList" onChange={this.getDefFromEntryId}>

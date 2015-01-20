@@ -30,7 +30,7 @@ var search_end = function(array,tofind) {
     var out=[];
     var i=0;
     for(var i=0; i<array.length; i++){
-      if(array[i].indexOf(tofind)==array[i].length-1){
+      if(array[i].indexOf(tofind) != -1 && array[i].indexOf(tofind)==array[i].length-tofind.length){
         out.push([array[i],i]);
       }
     }
@@ -288,6 +288,7 @@ var Overview=React.createClass({displayName: "Overview",
       if(!this.props.fulltextResultLength) resCounter=res.length;
       else resCounter=this.props.fulltextResultLength;
     }
+    //if(res.length==0) res=[["沒有結果"]];
     return(
 	React.createElement("div", null, 
 		React.createElement("select", {className: "resultlist", ref: "entryList", onChange: this.getDefFromEntryId}, 
